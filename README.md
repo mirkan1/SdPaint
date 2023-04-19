@@ -3,17 +3,19 @@ A simple python script that lets you paint on a canvas and sends that image ever
 
 ## Controls
 
-| Key / Mouse button                  | Control                          |
-|-------------------------------------|----------------------------------|
-| Left button                         | Draw with the current brush size |
-| Scroll up / down                    | Increase / decrease brush size   |
-| Middle button, or `e` + Left button | Eraser                           |
-| `shift` + Left button               | Draw a line                      |
-| `s`                                 | Save the current generated image |
-| `RETURN` or `ENTER`                 | Force image rendering            |
-| `UP` / `DOWN`                       | Increase / decrease seed by 1    |
-| `n`                                 | Random seed value                |
-| `x` or `ESC`                        | Quit                             |
+| Key / Mouse button                  | Control                                |
+|-------------------------------------|----------------------------------------|
+| Left button                         | Draw with the current brush size       |
+| Scroll up / down                    | Increase / decrease brush size         |
+| Middle button, or `e` + Left button | Eraser                                 |
+| `shift` + Left button               | Draw a line                            |
+| `s`                                 | Save the current generated image       |
+| `RETURN` or `ENTER`                 | Force image rendering                  |
+| `t`                                 | Cycle render wait time (+0.5s, or off) |
+| `UP` / `DOWN`                       | Increase / decrease seed by 1          |
+| `n`                                 | Random seed value                      |
+| `l` / `m`                           | Previous / next ControlNel model       |
+| `x` or `ESC`                        | Quit                                   |
 
 
 ## Installation
@@ -39,6 +41,11 @@ If you want to add aditional models into your controlnet extension you can do so
     ".\stable-diffusion-webui\extensions\sd-webui-controlnet\models"
 ```
 
+
+## Img2img Experimental mode
+
+Launch the program with `--img2img <image_file_path>` to watch an image file for changes, and use it as img2img source. The `img2img.json` file
+is used in this mode.
 
 ## Contributing
 
