@@ -14,6 +14,7 @@ A simple python script that lets you paint on a canvas and sends that image ever
 | `t`                                 | Cycle render wait time (+0.5s, or off) |
 | `UP` / `DOWN`                       | Increase / decrease seed by 1          |
 | `n`                                 | Random seed value                      |
+| `o`                                 | Open new image                         |
 | `l` / `m`                           | Previous / next ControlNel model       |
 | `x` or `ESC`                        | Quit                                   |
 
