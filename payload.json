@@ -6,7 +6,7 @@
     "hr_upscaler": "none",
     "hr_scale": 1,
     "prompt": "an eye of a dragon, flat style",
-    "seed": 6070090287782172672,
+    "seed": 8136371554375120896,
     "sampler_name": "UniPC",
     "batch_size": 1,
     "steps": 16,
@@ -24,9 +24,9 @@
             "guessmode": "false"
         }
     ],
-  "controlnet_models": [
-    "control_v11p_sd15_scribble_fp16",
-    "control_v11p_sd15_lineart_fp16",
-    "control_v11p_sd15_lineart_anime_fp16"
-  ]
+    "controlnet_models": [
+        "control_v11p_sd15_scribble_fp16",
+        "control_v11p_sd15_lineart_fp16",
+        "control_v11p_sd15_lineart_anime_fp16"
+    ]
 }
