@@ -125,6 +125,18 @@ def update_image(image_data):
     global need_redraw
     need_redraw = True
 
+def upload_image_path(file_path):
+    with open(file_path, "rb") as f:
+        data = f.read()
+    data = base64.b64encode(data).decode('utf-8')
+    with open("payload.json", "r") as f:
+        payload = json.load(f)
+    payload['controlnet_units'][0]['input_image'] = data
+    response = requests.post(url=f'{url}/controlnet/txt2img', json=payload)
+    r = response.json()
+    return_img = r['images'][0]
+    update_image(return_img)
+
 def new_random_seed_for_payload(seed=None):
     with open("payload.json", "r") as f:
         payload = json.load(f)
@@ -135,6 +147,11 @@ def new_random_seed_for_payload(seed=None):
     with open("payload.json", "w") as f:
         json.dump(payload, f, indent=4)
     return payload
+
+def ask_for_photo():
+    # Set up the main loop
+    file_path="C:\\Users\\rkilic\\OneDrive\\Resimler\\eye_no_pupil.png"
+    upload_image_path(file_path)
 
 # Set up the main loop
 running = True
@@ -174,14 +191,11 @@ while running:
                 or (event.type == pygame.KEYDOWN and event.key in (pygame.K_RETURN, pygame.K_KP_ENTER, pygame.K_UP, pygame.K_DOWN, pygame.K_n)):
             if event.type == pygame.KEYDOWN:
                 event.button = 1
-
+                print(event.key)
                 if event.key == pygame.K_UP:
                     seed = seed + 1
                 elif event.key == pygame.K_DOWN:
                     seed = seed - 1
-                elif event.key == pygame.K_n:
-                    seed = round(random.random() * sys.maxsize)
-                    new_random_seed_for_payload(seed)
 
             elif event.type == pygame.FINGERUP:
                 event.button = 1
@@ -268,7 +282,11 @@ while running:
             elif event.key in (pygame.K_ESCAPE, pygame.K_x):
                 pygame.quit()
                 exit(0)
-
+            elif event.key == pygame.K_r:
+                seed = round(random.random() * sys.maxsize)
+                new_random_seed_for_payload(seed)
+            elif event.key == pygame.K_t: # CONTROL + T
+                ask_for_photo()
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_e:
                 eraser_down = False
