@@ -81,7 +81,7 @@ brush_colors = {
     2: (255, 255, 255),  # Middle mouse button color
     'e': (255, 255, 255),  # Eraser color
 }
-brush_pos = {1: None, 2: None, 'e': None}
+brush_pos = {1: None, 2: None, 'e': None, 3: None}
 prev_pos = None
 shift_down = False
 shift_pos = None
@@ -116,7 +116,7 @@ def save_file_dialog():
 
 def update_image(image_data):
     # Decode base64 image data
-    img_bytes = io.BytesIO(base64.b64decode(image_data))
+    img_bytes = io.BytesIO(base64.b64decode(image_data.split(",", 1)[0]))
     img_surface = pygame.image.load(img_bytes)
     if soft_upscale != 1.0:
         img_surface = pygame.transform.smoothscale(img_surface, (img_surface.get_width() * soft_upscale, img_surface.get_height() * soft_upscale))
@@ -212,17 +212,17 @@ while running:
                     # Save the inverted image as base64-encoded data
                     data = io.BytesIO()
                     pygame.image.save(img, data)
-                    data = base64.b64encode(data.getvalue()).decode('utf-8')
+                    encoded_image = base64.b64encode(data.getvalue()).decode('utf-8')
                     with open("payload.json", "r") as f:
                         payload = json.load(f)
-
-                    payload['controlnet_units'][0]['input_image'] = data
-                    payload['hr_second_pass_steps'] = math.floor(payload['steps'] * payload['denoising_strength'])
                     payload['seed'] = seed
+                    payload['alwayson_scripts']['controlnet']['args'][0]['input_image'] = encoded_image
+                    payload['hr_second_pass_steps'] = math.floor(payload['steps'] * payload['denoising_strength'])
+
 
                     def send_request():
                         global server_busy
-                        response = requests.post(url=f'{url}/controlnet/txt2img', json=payload)
+                        response = requests.post(url=f'{url}/sdapi/v1/txt2img', json=payload)
                         if response.status_code == 200:
                             r = response.json()
                             return_img = r['images'][0]

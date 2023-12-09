@@ -1,3 +1,7 @@
 pygame
-numpy
-pillow
+requests
+Pillow
+opencv-python-headless
+psd_tools
+uvicorn
+fastapi[all]
