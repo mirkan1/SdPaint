@@ -1,0 +1,19 @@
+{
+    "prompt": "a castle",
+    "negative_prompt": "(worst quality,low quality,bad quality,normal quality:1.2)",
+    "seed": 42,
+    "batch_size": 1,
+    "steps": 16,
+    "cfg_scale": 7,
+    "quick": {
+        "steps": 6,
+        "cfg_scale": 3,
+        "lora":  "LCM_LoRA_Weights",
+        "lora_weight": 0.4,
+        "sampler": "DPM++ SDE Karras"
+    },
+    "override_settings": {
+        "CLIP_stop_at_last_layers": 1
+    },
+    "override_settings_restore_afterwards": "true"
+}

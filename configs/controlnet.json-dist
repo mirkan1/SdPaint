@@ -1,0 +1,31 @@
+{
+    "prompt": "a castle",
+    "negative_prompt": "(worst quality,low quality,bad quality,normal quality:1.2)",
+    "enable_hr": "false",
+    "seed": 42,
+    "batch_size": 1,
+    "steps": 16,
+    "cfg_scale": 7,
+    "quick": {
+        "steps": 6,
+        "cfg_scale": 3,
+        "lora":  "LCM_LoRA_Weights",
+        "lora_weight": 0.4,
+        "sampler": "DPM++ SDE Karras"
+    },
+    "width": 512,
+    "height": 512,
+    "override_settings": {
+        "CLIP_stop_at_last_layers": 1
+    },
+    "override_settings_restore_afterwards": "true",
+    "controlnet_units": [
+        {
+            "weight": 0.6,
+            "guidance_start": 0.0,
+            "guidance_end": 1.0,
+            "module": "none",
+            "pixel_perfect": "false"
+        }
+    ]
+}
